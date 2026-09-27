@@ -1,0 +1,10 @@
+@AppositionBackend_HostAddress = http://localhost:5219
+
+POST {{AppositionBackend_HostAddress}}/api/analysis
+Content-Type: application/json
+
+{
+  "prompt": "splits grocery bills between roommates automatically, with receipt scanning and payment reminders, for college students"
+}
+
+###

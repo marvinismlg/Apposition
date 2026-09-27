@@ -1,0 +1,41 @@
+{
+ "_about": "Fitted 2026-09-27 on 31 apps with reported revenue (11 company filings, 20 indie apps with verified or founder-reported revenue). Leave-one-out accuracy: established apps, likely window right 75%, wide window 100%; small apps, likely 63%, wide 95%. Log revenue = mean of a ratings model and, when the app charts, a top-grossing rank model.",
+ "established_min_ratings": 50000,
+ "ratings_model": {
+  "established": [
+   5.070555258506995,
+   0.8576295981068061
+  ],
+  "small": [
+   6.939376600488902,
+   0.40835256618635574
+  ]
+ },
+ "chart_slope": 0.9,
+ "chart_scale": {
+  "game": 23.070132302321284,
+  "app": 20.965322452435945
+ },
+ "windows": {
+  "established": {
+   "likely": 2,
+   "wide": 5
+  },
+  "small": {
+   "likely": 5,
+   "wide": 10
+  }
+ },
+ "genre_share_total": 1400,
+ "genre_share": {
+  "6007": 111,
+  "6008": 137,
+  "6014": 542,
+  "6011": 47,
+  "6005": 83,
+  "6012": 79,
+  "6017": 26,
+  "6004": 23,
+  "6013": 43
+ }
+}

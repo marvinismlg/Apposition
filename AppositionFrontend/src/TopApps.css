@@ -1,0 +1,278 @@
+/* ---- App Store top 10: full-width strip across the top of the window ---- */
+.top-apps {
+  position: relative;
+  z-index: 10; /* dropdowns sit over the "How it works" content below */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+.top-apps-caption {
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 16px;
+  font-size: 11px;
+  color: var(--text);
+}
+
+.top-apps-dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text);
+  opacity: 0.5;
+}
+
+.top-apps-dot.live {
+  background: var(--sev-low);
+  opacity: 1;
+  animation: live-pulse 2s ease-in-out infinite;
+}
+
+@keyframes live-pulse {
+  50% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--sev-low) 25%, transparent); }
+}
+
+/* ---- sliding strip: three copies of the list scroll left, pause on hover ---- */
+/* clip only sideways so the hover dropdowns can hang below the strip */
+.top-apps-track {
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+.top-apps-strip {
+  display: flex;
+  width: max-content;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  animation: strip-slide linear infinite;
+}
+
+/* spacing lives on each item (not a flex gap) so one copy is exactly a third of the strip */
+.top-app-item {
+  position: relative;
+  padding-right: 10px;
+}
+
+/* after one copy has left the screen on the left, the next copy is in its place: loop */
+@keyframes strip-slide {
+  to { transform: translateX(-33.3333%); }
+}
+
+.top-apps-track:hover .top-apps-strip,
+.top-apps-track:focus-within .top-apps-strip {
+  animation-play-state: paused;
+}
+
+.top-app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 112px;
+  padding: 12px 8px 10px;
+  border-radius: 18px;
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.top-app-item:hover .top-app,
+.top-app:focus-visible {
+  background: var(--card-bg);
+  box-shadow:
+    0 0 0 1px var(--border),
+    0 8px 20px -10px rgba(29, 51, 116, 0.35);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.top-app-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 13px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.top-app-name {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--text-h);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---- hover dropdown: company revenue, valuation, users ---- */
+.top-app-drop {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: calc(50% - 5px);
+  width: 230px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  box-shadow:
+    0 18px 40px -16px rgba(29, 51, 116, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-8px) scaleY(0.92);
+  transform-origin: top center;
+  transition:
+    opacity 0.2s ease,
+    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    visibility 0s 0.3s;
+}
+
+/* set by checkDropFits in TopApps.tsx when there's no room below: open upward instead */
+.top-app-item[data-drop-dir='up'] .top-app-drop {
+  top: auto;
+  bottom: calc(100% + 6px);
+  transform: translateX(-50%) translateY(8px) scaleY(0.92); /* rises up into place */
+  transform-origin: bottom center;
+}
+
+.top-app-item[data-drop-dir='up'] .top-app-drop::before {
+  top: auto;
+  bottom: -6px;
+  transform: rotate(225deg);
+}
+
+/* set by checkDropFits in TopApps.tsx when the dropdown would be cut off at a window edge */
+.top-app-item[data-drop='off'] .top-app-drop {
+  display: none;
+}
+
+/* little pointer connecting the dropdown to its tile */
+.top-app-drop::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: calc(50% - 6px);
+  width: 12px;
+  height: 12px;
+  background: inherit;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  transform: rotate(45deg);
+}
+
+.top-app-item:hover .top-app-drop,
+.top-app-item:focus-within .top-app-drop {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%);
+  transition:
+    opacity 0.2s ease,
+    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    visibility 0s;
+}
+
+.top-app-drop-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text);
+}
+
+.top-app-drop-head strong {
+  font-family: var(--heading);
+  font-size: 15px;
+  color: var(--text-h);
+}
+
+.top-app-drop dl {
+  margin: 0;
+}
+
+.top-app-drop dl > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  padding: 5px 0;
+}
+
+.top-app-drop dt {
+  font-size: 12px;
+  color: var(--text);
+}
+
+.top-app-drop dd {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.top-app-drop dd strong {
+  font-family: var(--heading);
+  font-size: 16px;
+  color: var(--accent-ink);
+}
+
+.top-app-drop dd span {
+  font-size: 10px;
+  color: var(--text);
+}
+
+/* rows reveal one after another as the dropdown opens */
+.top-app-drop dl > div {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.top-app-item:hover .top-app-drop dl > div,
+.top-app-item:focus-within .top-app-drop dl > div {
+  opacity: 1;
+  transform: none;
+}
+
+.top-app-item:hover .top-app-drop dl > div:nth-child(2),
+.top-app-item:focus-within .top-app-drop dl > div:nth-child(2) {
+  transition-delay: 0.06s;
+}
+
+.top-app-item:hover .top-app-drop dl > div:nth-child(3),
+.top-app-item:focus-within .top-app-drop dl > div:nth-child(3) {
+  transition-delay: 0.12s;
+}
+
+/* no motion: show the ten apps as a static, wrapping row */
+@media (prefers-reduced-motion: reduce) {
+  .top-apps-strip {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+    animation: none;
+  }
+
+  .top-apps-strip > li[aria-hidden] {
+    display: none;
+  }
+}
+
+/* inside the centred landing column, flex centring already spans the strip across the window */
+.landing .top-apps {
+  margin-left: 0;
+}
