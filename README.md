@@ -4,7 +4,7 @@
 
 Apposition is a competitor research tool for startup founders. A user describes an app idea in plain English, and Apposition finds similar App Store products, compares features, analyzes negative reviews, estimates competitor revenue, and suggests ways to differentiate.
 
-**Live Demo:** [apposition-gray.vercel.app](https://apposition-gray.vercel.app/)
+**Live Demo:** [apposition-gray.vercel.app](https://apposition-68jhiqg6a-marvin-tientcheus-projects.vercel.app/)
 
 ## Built in 24 Hours
 
