@@ -37,6 +37,24 @@ Search API     Analysis Service
              DOCX + Charts
 ```
 
+## Tech Stack
+
+| Layer | Technology |
+| --- | --- |
+| Frontend | React, TypeScript, Vite |
+| Backend API | C#, ASP.NET Core |
+| Analysis API | Python, FastAPI |
+| App data | Apple iTunes Search API |
+| NLP | SentenceTransformers, `all-MiniLM-L6-v2` |
+| Similarity | Cosine similarity |
+| AI explanations | Google Gemini API |
+| Reviews | Apple customer review feeds |
+| Visualization | Matplotlib |
+| Reports | `python-docx` |
+| Frontend hosting | Vercel |
+| Backend deployment | Docker / Render |
+| Development workflow | Agentic AI tools for UI, debugging, and repetitive frontend tasks |
+
 ## C# / ASP.NET Backend
 
 The main backend is written in **C# with ASP.NET Core**.
@@ -155,23 +173,6 @@ The charts are embedded directly into the generated `.docx` file and returned th
 
 We chose this approach instead of building accounts, databases, and saved dashboards during the hackathon. Users can simply download their analysis directly to their computer and keep it for later.
 
-## Tech Stack
-
-| Layer | Technology |
-| --- | --- |
-| Frontend | React, TypeScript, Vite |
-| Backend API | C#, ASP.NET Core |
-| Analysis API | Python, FastAPI |
-| App data | Apple iTunes Search API |
-| NLP | SentenceTransformers, `all-MiniLM-L6-v2` |
-| Similarity | Cosine similarity |
-| AI explanations | Google Gemini API |
-| Reviews | Apple customer review feeds |
-| Visualization | Matplotlib |
-| Reports | `python-docx` |
-| Frontend hosting | Vercel |
-| Backend deployment | Docker / Render |
-| Development workflow | Agentic AI tools for UI, debugging, and repetitive frontend tasks |
 
 ## Real-World Use
 
