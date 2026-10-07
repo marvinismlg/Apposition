@@ -1,9 +1,9 @@
 import type { AnalysisResponse, AnalysisResult, Brief } from './types'
 
-// Locally, Vite proxies /api to the C# backend (see vite.config.ts), so the base is empty.
-// A deployed build sets VITE_API_BASE to the backend's public URL, e.g.
-// https://apposition-api.onrender.com. It holds no secret: it ends up in the browser bundle.
-const API_BASE = (import.meta.env.VITE_API_BASE ?? '').replace(/\/$/, '')
+// Leave the base empty: Vite proxies /api locally, and the root vercel.json routes
+// it to the C# service in the same Vercel deployment. A local override is public
+// configuration, not a secret: VITE_ variables end up in the browser bundle.
+const API_BASE = (import.meta.env.VITE_API_BASE ?? '').trim().replace(/\/$/, '')
 
 async function failure(res: Response) {
   // ASP.NET problem responses carry the message in "detail"; plain 400s are text.

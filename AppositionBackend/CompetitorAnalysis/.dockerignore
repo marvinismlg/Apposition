@@ -2,5 +2,6 @@
 __pycache__/
 *.pyc
 # Secrets stay out of the image; the host provides GEMINI_KEY instead.
-.env
-.env.local
+.env*
+!.env.example
+.vercel/

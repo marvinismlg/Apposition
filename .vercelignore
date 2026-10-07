@@ -1,0 +1,15 @@
+# Local files are not deployment inputs. Each service installs its own dependencies.
+.git
+.cache
+.vercel
+**/node_modules
+**/dist
+**/deps
+**/bin
+**/obj
+**/.venv
+**/__pycache__
+**/*.pyc
+**/*.tsbuildinfo
+**/.env*
+!**/.env.example

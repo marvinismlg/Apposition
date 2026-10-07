@@ -55,6 +55,9 @@ project.lock.json
 # Vite
 LoopedFrontend/.vite/
 
+# Vercel local project metadata and build output
+.vercel/
+
 # TypeScript build info
 *.tsbuildinfo
 
