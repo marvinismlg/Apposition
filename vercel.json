@@ -1,0 +1,59 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "frontend": {
+      "root": "AppositionFrontend",
+      "framework": "vite",
+      "installCommand": "npm ci",
+      "buildCommand": "npm run build",
+      "outputDirectory": "dist"
+    },
+    "api": {
+      "root": "AppositionBackend",
+      "runtime": "container",
+      "entrypoint": "Dockerfile.vercel",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "analysis",
+          "format": "url",
+          "env": "PythonApiUrl"
+        }
+      ],
+      "functions": {
+        "Dockerfile.vercel": {
+          "maxDuration": 300
+        }
+      }
+    },
+    "analysis": {
+      "root": "AppositionBackend/CompetitorAnalysis",
+      "runtime": "container",
+      "entrypoint": "Dockerfile.vercel",
+      "functions": {
+        "Dockerfile.vercel": {
+          "maxDuration": 300,
+          "maxConcurrency": 1
+        }
+      }
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/apple-rss/:path*",
+      "destination": "https://rss.marketingtools.apple.com/:path*"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": { "service": "api" }
+    },
+    {
+      "source": "/health",
+      "destination": { "service": "api" }
+    },
+    {
+      "source": "/(.*)",
+      "destination": { "service": "frontend" }
+    }
+  ]
+}

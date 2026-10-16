@@ -15,7 +15,7 @@ public class PythonService
     public async Task<IdeaBrief> ExtractBrief(string prompt)
     {
         using var response = await _httpClient.PostAsJsonAsync(
-            "/extract",
+            "extract",
             new { prompt });
 
         response.EnsureSuccessStatusCode();
@@ -52,7 +52,7 @@ public class PythonService
         };
 
         using var response = await _httpClient.PostAsJsonAsync(
-            "/similarity",
+            "similarity",
             pythonRequest);
 
         response.EnsureSuccessStatusCode();
@@ -63,7 +63,7 @@ public class PythonService
     public async Task<byte[]> BuildReport(ReportRequest request)
     {
         using var response = await _httpClient.PostAsJsonAsync(
-            "/report",
+            "report",
             new { result = request.Result, planned = request.Planned });
 
         response.EnsureSuccessStatusCode();

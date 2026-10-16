@@ -2,3 +2,6 @@ bin/
 obj/
 # The Python service is built from its own folder.
 CompetitorAnalysis/
+.vercel/
+.env*
+!.env.example

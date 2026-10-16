@@ -76,7 +76,7 @@ class ReportRequest(BaseModel):
 
 @app.get("/health")
 def health():
-    # Render pings this; the embedding model is already loaded by import time.
+    # Service health check; the embedding model is already loaded by import time.
     return {"status": "ok"}
 
 
